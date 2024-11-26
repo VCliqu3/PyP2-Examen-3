@@ -99,14 +99,14 @@ public class PlayerCombat : MonoBehaviourPun
 
     private void Respawn()
     {
+        if (!PhotonViewMine()) return;
+
         transform.position = GameController.Instance.PlayerSpawnPosition.position;
         OnPlayerRespawn?.Invoke(this, EventArgs.Empty);
     }
 
     private void PlayerHealth_OnPlayerDeath(object sender, System.EventArgs e)
     {
-        if (!PhotonViewMine()) return;
-
         Respawn();
         photonView.RPC("IncreaseDeathCount", RpcTarget.AllBuffered, 1);
     }
