@@ -3444,6 +3444,7 @@ MonoBehaviour:
   bulletColorDropdown: {fileID: 1219757499}
   playerSpeedSlider: {fileID: 229163219}
   playerDamageSlider: {fileID: 264712780}
+  playerFireRateSlider: {fileID: 131890768}
   nextSceneName: Gameplay
 --- !u!1 &1113827366
 GameObject:
