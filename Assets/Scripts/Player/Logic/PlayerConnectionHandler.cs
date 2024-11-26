@@ -12,6 +12,7 @@ public class PlayerConnectionHandler : MonoBehaviourPun
 
     public event EventHandler<OnConnectionEventArgs> OnConnection;
 
+    public static event EventHandler OnLocalInstanceConnection;
     public class OnConnectionEventArgs : EventArgs
     {
         public PlayerInfo playerInfo;
@@ -48,6 +49,7 @@ public class PlayerConnectionHandler : MonoBehaviourPun
         PlayerInfo playerInfo = new PlayerInfo { playerName = playerName, playerColor = playerColor, bulletColor = bulletColor, playerSpeed = playerSpeed, playerDamage = playerDamage, playerFireRate = playerFireRate};
 
         OnConnection?.Invoke(this, new OnConnectionEventArgs { playerInfo = playerInfo});
+        OnLocalInstanceConnection?.Invoke(this, EventArgs.Empty);
     }
 
     public bool PhotonViewMine() => photonView.IsMine;
