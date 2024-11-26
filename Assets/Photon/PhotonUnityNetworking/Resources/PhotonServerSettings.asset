@@ -57,6 +57,9 @@ MonoBehaviour:
   - DecreaseHealth
   - DecreaseHealthBullet
   - SetKillCount
+  - IncreaseDeathCount
+  - IncreaseKillCount
+  - SetDeathCount
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
