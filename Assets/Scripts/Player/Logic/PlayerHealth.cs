@@ -71,9 +71,8 @@ public class PlayerHealth : MonoBehaviourPun
         if (PhotonViewMine()) OnLocalInstanceHealthChanged?.Invoke(this, new OnHeathEventArgs { health = health, maxHealth = maxHealth });
     }
 
-    public void TakeDamage(int damage)
+    public void TakeBuletDamage(int damage)
     {
-        if (!PhotonViewMine()) return;
         photonView.RPC("DecreaseHealth", RpcTarget.AllBuffered, damage);
     }
 

@@ -85,7 +85,7 @@ public class BulletHandler : MonoBehaviourPun
         {
             if(ownerId != playerHealth.GetPhotonViewID())
             {
-                playerHealth.TakeDamage(Mathf.RoundToInt(damage));
+                playerHealth.TakeBuletDamage(Mathf.RoundToInt(damage));
             }
         }
 
