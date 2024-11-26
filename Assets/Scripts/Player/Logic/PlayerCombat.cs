@@ -89,9 +89,9 @@ public class PlayerCombat : MonoBehaviourPun
     private void IncreaseDeathCount(int quantity)
     {
         deathCount += quantity;
-        OnDeathCountChanged?.Invoke(this, new OnDeathCountEventArgs { deathCount = quantity });
+        OnDeathCountChanged?.Invoke(this, new OnDeathCountEventArgs { deathCount = deathCount });
 
-        if (PhotonViewMine()) OnLocalInstanceDeathCountChanged?.Invoke(this, new OnDeathCountEventArgs { deathCount = quantity });
+        if (PhotonViewMine()) OnLocalInstanceDeathCountChanged?.Invoke(this, new OnDeathCountEventArgs { deathCount = deathCount });
     }
 
     public bool PhotonViewMine() => photonView.IsMine;
