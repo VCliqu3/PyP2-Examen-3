@@ -39,13 +39,13 @@ public class PlayerConnectionHandler : MonoBehaviourPun
     {
         if (!PhotonViewMine()) return;
 
-        photonView.RPC("PlayerConnection", RpcTarget.AllBuffered, GameData.playerName, GameData.playerColor, GameData.bulletColor, GameData.playerSpeed, GameData.playerDamage, GameData.playerFireRate, GameData.playerScore);
+        photonView.RPC("PlayerConnection", RpcTarget.AllBuffered, GameData.playerName, GameData.playerColor, GameData.bulletColor, GameData.playerSpeed, GameData.playerDamage, GameData.playerFireRate);
     }
 
     [PunRPC]
     private void PlayerConnection(string playerName, PlayerColor playerColor, BulletColor bulletColor, float playerSpeed, float playerDamage, float playerFireRate, int playerScore)
     {
-        PlayerInfo playerInfo = new PlayerInfo { playerName = playerName, playerColor = playerColor, bulletColor = bulletColor, playerSpeed = playerSpeed, playerDamage = playerDamage, playerFireRate = playerFireRate, playerScore = playerScore};
+        PlayerInfo playerInfo = new PlayerInfo { playerName = playerName, playerColor = playerColor, bulletColor = bulletColor, playerSpeed = playerSpeed, playerDamage = playerDamage, playerFireRate = playerFireRate};
 
         OnConnection?.Invoke(this, new OnConnectionEventArgs { playerInfo = playerInfo});
     }

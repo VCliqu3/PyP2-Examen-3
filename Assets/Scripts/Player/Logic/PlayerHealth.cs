@@ -17,10 +17,20 @@ public class PlayerHealth : MonoBehaviourPun
     public static event EventHandler<OnHeathEventArgs> OnLocalInstanceHealthSet;
     public static event EventHandler<OnHeathEventArgs> OnLocalInstanceHealthChanged;
 
+    public static event EventHandler<OnPlayerKilledByPlayerEventArgs> OnPlayerKilledByPlayer;
+
+    public event EventHandler OnPlayerDeath;
+
     public class OnHeathEventArgs : EventArgs
     {
         public int health;
         public int maxHealth;
+    }
+
+    public class OnPlayerKilledByPlayerEventArgs : EventArgs
+    {
+        public int killedPlayerID;
+        public int killerPlayerID;
     }
 
     private void OnEnable()
@@ -69,11 +79,31 @@ public class PlayerHealth : MonoBehaviourPun
         OnHealthChanged?.Invoke(this, new OnHeathEventArgs { health = health, maxHealth = maxHealth });
 
         if (PhotonViewMine()) OnLocalInstanceHealthChanged?.Invoke(this, new OnHeathEventArgs { health = health, maxHealth = maxHealth });
+
+        if (health <= 0f)
+        {
+            OnPlayerDeath?.Invoke(this, EventArgs.Empty);
+        }
     }
 
-    public void TakeBuletDamage(int damage)
+    [PunRPC]
+    private void DecreaseHealthBullet(int quantity, int shooterID)
     {
-        photonView.RPC("DecreaseHealth", RpcTarget.AllBuffered, damage);
+        health = health - quantity < 0 ? 0 : health - quantity;
+        OnHealthChanged?.Invoke(this, new OnHeathEventArgs { health = health, maxHealth = maxHealth });
+
+        if (PhotonViewMine()) OnLocalInstanceHealthChanged?.Invoke(this, new OnHeathEventArgs { health = health, maxHealth = maxHealth });
+
+        if(health <= 0f)
+        {
+            OnPlayerDeath?.Invoke(this, EventArgs.Empty);
+            OnPlayerKilledByPlayer?.Invoke(this, new OnPlayerKilledByPlayerEventArgs { killedPlayerID = GetPhotonViewID(), killerPlayerID = shooterID});
+        }
+    }
+
+    public void TakeDamageBullet(int damage, int shooterID)
+    {
+        photonView.RPC("DecreaseHealthBullet", RpcTarget.AllBuffered, damage, shooterID);
     }
 
     public bool PhotonViewMine() => photonView.IsMine;

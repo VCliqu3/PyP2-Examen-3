@@ -10,5 +10,4 @@ public static class GameData
     public static float playerSpeed;
     public static float playerDamage;
     public static float playerFireRate;
-    public static int playerScore;
 }

@@ -6,5 +6,4 @@ public class PlayerInfo
     public float playerSpeed;
     public float playerDamage;
     public float playerFireRate;
-    public int playerScore;
 }
