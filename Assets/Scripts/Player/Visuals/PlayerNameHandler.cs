@@ -11,7 +11,7 @@ public class PlayerNameHandler : MonoBehaviourPun
     [SerializeField] private TextMeshPro playerNameText;
 
     [Header("Settings")]
-    [SerializeField] private bool disableOwn;
+    [SerializeField] private bool hideOwn;
 
     private void OnEnable()
     {
@@ -27,12 +27,12 @@ public class PlayerNameHandler : MonoBehaviourPun
 
     private void Start()
     {
-        HandleDisableOwn();
+        HandleHideOwn();
     }
 
-    private void HandleDisableOwn()
+    private void HandleHideOwn()
     {
-        if(disableOwn && playerConnectionHandler.PhotonViewMine())
+        if(hideOwn && playerConnectionHandler.PhotonViewMine())
         {
             playerNameText.gameObject.SetActive(false);
         }

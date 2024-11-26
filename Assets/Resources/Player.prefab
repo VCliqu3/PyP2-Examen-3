@@ -483,9 +483,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5665298333686397354}
-  - {fileID: 7638259406521291470}
   - {fileID: 320558525340465148}
   - {fileID: 2492357399210266334}
+  - {fileID: 7638259406521291470}
   - {fileID: 640731378149179230}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -798,8 +798,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8172193801126726272}
   - component: {fileID: 3083129474229392178}
-  - component: {fileID: 4772846131027401995}
   - component: {fileID: 8329692761795412358}
+  - component: {fileID: 4772846131027401995}
   - component: {fileID: 1353389623860856525}
   - component: {fileID: 4820551118451092089}
   m_Layer: 0
@@ -840,7 +840,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerConnectionHandler: {fileID: 5524928002435105099}
   playerNameText: {fileID: 1396345720917662472}
-  disableOwn: 1
+  hideOwn: 1
+--- !u!114 &8329692761795412358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5398895641563951220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0047c38d5bc8ce0458a2018c550dc898, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerConnectionHandler: {fileID: 5524928002435105099}
+  playerHealth: {fileID: 3211360306819125944}
+  healthBarBG: {fileID: 3112043261882203227}
+  healthBarImage: {fileID: 4870527528124810189}
+  hideOwn: 1
 --- !u!114 &4772846131027401995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -871,20 +888,6 @@ MonoBehaviour:
   - playerColor: 5
     material: {fileID: 2100000, guid: e5a577cff560027479ea337acd66ae58, type: 2}
   debug: 1
---- !u!114 &8329692761795412358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5398895641563951220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0047c38d5bc8ce0458a2018c550dc898, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerHealth: {fileID: 3211360306819125944}
-  healthBarImage: {fileID: 4870527528124810189}
 --- !u!114 &1353389623860856525
 MonoBehaviour:
   m_ObjectHideFlags: 0
