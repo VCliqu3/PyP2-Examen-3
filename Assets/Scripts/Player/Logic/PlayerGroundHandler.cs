@@ -8,18 +8,11 @@ public class PlayerGroundHandler : MonoBehaviour
 
     [Header("Slope Movement")]
     [SerializeField] public float maxSlopeAngle;
-    public bool IsGrounded { get; private set; }
+    public bool IsGrounded;
     public bool OnSlope { get; private set; }
     public bool ExitingSlope { get; private set; }
 
     private RaycastHit slopeHit; 
-
-    private Collider _collider;
-
-    private void Awake()
-    {
-        _collider = GetComponent<Collider>();
-    }
 
     private void Update()
     {
@@ -29,12 +22,12 @@ public class PlayerGroundHandler : MonoBehaviour
 
     private bool GetGrounded()
     {
-        return Physics.Raycast(transform.position, Vector3.down, _collider.bounds.extents.y + .25f, groundMask);
+        return Physics.Raycast(transform.position + new Vector3(0f,0.3f,0f), Vector3.down, 0.5f, groundMask);
     }
 
     private bool GetSlope()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, _collider.bounds.extents.y + .3f, groundMask))
+        if (Physics.Raycast(transform.position - new Vector3(0f, 0.3f, 0f), Vector3.down, out slopeHit, 0.5f, groundMask))
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             return angle < maxSlopeAngle && angle != 0;

@@ -759,6 +759,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   maxSlopeAngle: 60
+  IsGrounded: 0
 --- !u!114 &7833566361675050111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -774,6 +775,7 @@ MonoBehaviour:
   playerConnectionHandler: {fileID: 5524928002435105099}
   playerHealth: {fileID: 3211360306819125944}
   killCount: 0
+  deathCount: 0
 --- !u!1 &3228309278195924433
 GameObject:
   m_ObjectHideFlags: 0
