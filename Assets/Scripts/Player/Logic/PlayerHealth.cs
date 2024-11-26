@@ -6,8 +6,11 @@ using System;
 
 public class PlayerHealth : MonoBehaviourPun
 {
-    [Header("Settings")]
+    [Header("Components")]
     [SerializeField] private PlayerConnectionHandler playerConnectionHandler;
+    [SerializeField] private PlayerCombat playerCombat;
+
+    [Header("Settings")]
     [SerializeField, Range(50f,100f)] private int maxHealth;
     [SerializeField] private int health;
 
@@ -36,11 +39,13 @@ public class PlayerHealth : MonoBehaviourPun
     private void OnEnable()
     {
         playerConnectionHandler.OnConnection += PlayerConnectionHandler_OnConnection;
+        playerCombat.OnPlayerRespawn += PlayerCombat_OnPlayerRespawn;
     }
 
     private void OnDisable()
     {
         playerConnectionHandler.OnConnection -= PlayerConnectionHandler_OnConnection;
+        playerCombat.OnPlayerRespawn -= PlayerCombat_OnPlayerRespawn;
     }
 
     private void Awake()
@@ -112,5 +117,10 @@ public class PlayerHealth : MonoBehaviourPun
     private void PlayerConnectionHandler_OnConnection(object sender, PlayerConnectionHandler.OnConnectionEventArgs e)
     {
         SetHealth(health);
+    }
+
+    private void PlayerCombat_OnPlayerRespawn(object sender, EventArgs e)
+    {
+        photonView.RPC("SetHealth", RpcTarget.AllBuffered, maxHealth);
     }
 }

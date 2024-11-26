@@ -22,6 +22,8 @@ public class PlayerCombat : MonoBehaviourPun
     public static event EventHandler<OnKillCountEventArgs> OnLocalInstanceKillCountSet;
     public static event EventHandler<OnKillCountEventArgs> OnLocalInstanceKillCountChanged;
 
+    public event EventHandler OnPlayerRespawn;
+
     public class OnKillCountEventArgs : EventArgs
     {
         public int killCount;
@@ -63,7 +65,10 @@ public class PlayerCombat : MonoBehaviourPun
 
     private void Respawn()
     {
+        if (!PhotonViewMine()) return;
+
         transform.position = GameController.Instance.PlayerSpawnPosition.position;
+        OnPlayerRespawn?.Invoke(this, EventArgs.Empty);
     }
 
     private void PlayerHealth_OnPlayerDeath(object sender, System.EventArgs e)

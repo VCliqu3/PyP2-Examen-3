@@ -740,7 +740,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerConnectionHandler: {fileID: 5524928002435105099}
-  maxHealth: 50
+  playerCombat: {fileID: 7833566361675050111}
+  maxHealth: 51
   health: 0
 --- !u!114 &5444796035576593367
 MonoBehaviour:
