@@ -70,6 +70,8 @@ public class BulletHandler : MonoBehaviourPun
     {
         yield return new WaitForSeconds(lifespan);
 
+        if (!CanProcessActions()) yield break;
+
         PhotonNetwork.Destroy(gameObject);
     }
 
