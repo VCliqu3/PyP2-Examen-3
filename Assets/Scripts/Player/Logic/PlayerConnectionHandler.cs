@@ -43,7 +43,7 @@ public class PlayerConnectionHandler : MonoBehaviourPun
     }
 
     [PunRPC]
-    private void PlayerConnection(string playerName, PlayerColor playerColor, BulletColor bulletColor, float playerSpeed, float playerDamage, float playerFireRate, int playerScore)
+    private void PlayerConnection(string playerName, PlayerColor playerColor, BulletColor bulletColor, float playerSpeed, float playerDamage, float playerFireRate)
     {
         PlayerInfo playerInfo = new PlayerInfo { playerName = playerName, playerColor = playerColor, bulletColor = bulletColor, playerSpeed = playerSpeed, playerDamage = playerDamage, playerFireRate = playerFireRate};
 
