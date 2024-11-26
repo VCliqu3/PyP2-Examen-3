@@ -5,5 +5,6 @@ public class PlayerInfo
     public BulletColor bulletColor;
     public float playerSpeed;
     public float playerDamage;
+    public float playerFireRate;
     public int playerScore;
 }

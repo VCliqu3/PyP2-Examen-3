@@ -86,11 +86,13 @@ public class PlayerShoot : MonoBehaviourPun
     private void ResetTimer() => shootTimer = 1f / fireRate;
 
     private void SetDamage(float damage) => this.damage = damage;
+    private void SetFireRate(float fireRate) => this.fireRate = fireRate;
     private void SetBulletColor(BulletColor bulletColor) => this.bulletColor = bulletColor;
 
     private void PlayerConnectionHandler_OnConnection(object sender, PlayerConnectionHandler.OnConnectionEventArgs e)
     {
         SetDamage(e.playerInfo.playerDamage);
+        SetFireRate(e.playerInfo.playerFireRate);
         SetBulletColor(e.playerInfo.bulletColor);
     }
 }

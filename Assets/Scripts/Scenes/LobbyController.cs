@@ -17,6 +17,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
     [SerializeField] private TMP_Dropdown bulletColorDropdown;
     [SerializeField] private Slider playerSpeedSlider;
     [SerializeField] private Slider playerDamageSlider;
+    [SerializeField] private Slider playerFireRateSlider;
 
     [Header("Settings")]
     [SerializeField] private string nextSceneName;
@@ -49,6 +50,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
         GameData.bulletColor = Utilities.GetBulletColorByName(bulletColorDropdown.options[bulletColorDropdown.value].text);
         GameData.playerSpeed = playerSpeedSlider.value;
         GameData.playerDamage = playerDamageSlider.value;
+        GameData.playerFireRate = playerFireRateSlider.value;
     }
     
 
