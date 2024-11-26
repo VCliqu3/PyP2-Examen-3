@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using System;
 
 public class PlayerJump : MonoBehaviourPun
 {
@@ -23,6 +24,8 @@ public class PlayerJump : MonoBehaviourPun
 
     private bool JumpPressed => NewMovementInput.Instance.GetJumpDown();
     private bool shouldJump;
+
+    public static event EventHandler OnPlayerJump;
 
     private void Awake()
     {
@@ -75,6 +78,8 @@ public class PlayerJump : MonoBehaviourPun
         playerGroundHandler.SetExitingSlope(true);
 
         _rigidBody.velocity = new Vector3(_rigidBody.velocity.x, jumpForce, _rigidBody.velocity.z);
+
+        OnPlayerJump?.Invoke(this, EventArgs.Empty);
     }
 
     private void BetterJump()
