@@ -44,6 +44,8 @@ public class BulletHandler : MonoBehaviourPun
 
     private bool CanProcessActions() => photonView.IsMine && PhotonNetwork.IsConnected;
 
+    private bool PhotonViewMine() => photonView.IsMine;
+
     private void SetOwnerID(int ownerId)
     {
         this.ownerId = ownerId;
@@ -71,6 +73,21 @@ public class BulletHandler : MonoBehaviourPun
         yield return new WaitForSeconds(lifespan);
 
         if (!CanProcessActions()) yield break;
+
+        PhotonNetwork.Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!PhotonViewMine()) return;
+
+        if(other.TryGetComponent(out PlayerHealth playerHealth))
+        {
+            if(ownerId != playerHealth.GetPhotonViewID())
+            {
+                playerHealth.TakeDamage(Mathf.RoundToInt(damage));
+            }
+        }
 
         PhotonNetwork.Destroy(gameObject);
     }

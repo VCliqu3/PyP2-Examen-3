@@ -26,13 +26,11 @@ public class PlayerHealth : MonoBehaviourPun
     private void OnEnable()
     {
         playerConnectionHandler.OnConnection += PlayerConnectionHandler_OnConnection;
-        PlayerCrouch.OnPlayerCrouch += PlayerCrouch_OnPlayerCrouch;
     }
 
     private void OnDisable()
     {
         playerConnectionHandler.OnConnection -= PlayerConnectionHandler_OnConnection;
-        PlayerCrouch.OnPlayerCrouch -= PlayerCrouch_OnPlayerCrouch;
     }
 
     private void Awake()
@@ -72,16 +70,18 @@ public class PlayerHealth : MonoBehaviourPun
 
         if (PhotonViewMine()) OnLocalInstanceHealthChanged?.Invoke(this, new OnHeathEventArgs { health = health, maxHealth = maxHealth });
     }
+
+    public void TakeDamage(int damage)
+    {
+        if (!PhotonViewMine()) return;
+        photonView.RPC("DecreaseHealth", RpcTarget.AllBuffered, damage);
+    }
+
     public bool PhotonViewMine() => photonView.IsMine;
+    public int GetPhotonViewID() => photonView.ViewID;
 
     private void PlayerConnectionHandler_OnConnection(object sender, PlayerConnectionHandler.OnConnectionEventArgs e)
     {
         SetHealth(health);
-    }
-
-    private void PlayerCrouch_OnPlayerCrouch(object sender, EventArgs e)
-    {
-        if (!PhotonViewMine()) return;
-        photonView.RPC("DecreaseHealth", RpcTarget.AllBuffered, 1);
     }
 }
