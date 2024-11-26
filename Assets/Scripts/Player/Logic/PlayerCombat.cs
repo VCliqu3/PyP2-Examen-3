@@ -86,12 +86,12 @@ public class PlayerCombat : MonoBehaviourPun
     }
 
     [PunRPC]
-    private void IncreaseDeathCount(int deathCount)
+    private void IncreaseDeathCount(int quantity)
     {
-        deathCount += deathCount;
-        OnDeathCountChanged?.Invoke(this, new OnDeathCountEventArgs { deathCount = deathCount });
+        deathCount += quantity;
+        OnDeathCountChanged?.Invoke(this, new OnDeathCountEventArgs { deathCount = quantity });
 
-        if (PhotonViewMine()) OnLocalInstanceDeathCountChanged?.Invoke(this, new OnDeathCountEventArgs { deathCount = deathCount });
+        if (PhotonViewMine()) OnLocalInstanceDeathCountChanged?.Invoke(this, new OnDeathCountEventArgs { deathCount = quantity });
     }
 
     public bool PhotonViewMine() => photonView.IsMine;
@@ -99,14 +99,14 @@ public class PlayerCombat : MonoBehaviourPun
 
     private void Respawn()
     {
-        if (!PhotonViewMine()) return;
-
         transform.position = GameController.Instance.PlayerSpawnPosition.position;
         OnPlayerRespawn?.Invoke(this, EventArgs.Empty);
     }
 
     private void PlayerHealth_OnPlayerDeath(object sender, System.EventArgs e)
     {
+        if (!PhotonViewMine()) return;
+
         Respawn();
         photonView.RPC("IncreaseDeathCount", RpcTarget.AllBuffered, 1);
     }
