@@ -10,7 +10,7 @@ public class GameController : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject playerPrefab;
 
     [Header("Settings")]
-    [SerializeField] private Vector3 playerInstantiationPosition;
+    [SerializeField] private Transform playerSpawnPosition;
 
     private void Start()
     {
@@ -26,13 +26,13 @@ public class GameController : MonoBehaviourPunCallbacks
         if (!PhotonNetwork.IsConnectedAndReady) return;
         if (PlayerConnectionHandler.LocalInstance != null) return;
 
-        PhotonNetwork.Instantiate(playerPrefab.name,playerInstantiationPosition, Quaternion.identity);     
+        PhotonNetwork.Instantiate(playerPrefab.name, playerSpawnPosition.position, Quaternion.identity);     
     }
 
     private void TryCreatePlayerOnJoinedRoom()
     {
         if (PlayerConnectionHandler.LocalInstance != null) return;
         
-        PhotonNetwork.Instantiate(playerPrefab.name, playerInstantiationPosition, Quaternion.identity);
+        PhotonNetwork.Instantiate(playerPrefab.name, playerSpawnPosition.position, Quaternion.identity);
     }
 }
