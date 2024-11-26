@@ -11,6 +11,7 @@ public class BulletHandler : MonoBehaviourPun
     [Header("Settings")]
     [SerializeField, Range(5f,15f)] private float speed;
     [SerializeField, Range(1f,10f)] private float damage;
+    [SerializeField, Range(5f,10f)] private float lifespan;
     [SerializeField] private int ownerId;
 
     private Rigidbody rb;
@@ -29,6 +30,11 @@ public class BulletHandler : MonoBehaviourPun
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+    }
+
+    private void Start()
+    {
+        StartCoroutine(LifespanCoroutine());
     }
 
     void Update()
@@ -58,6 +64,13 @@ public class BulletHandler : MonoBehaviourPun
         if (!CanProcessActions()) return;
 
         rb.velocity = direction * speed;
+    }
+
+    private IEnumerator LifespanCoroutine()
+    {
+        yield return new WaitForSeconds(lifespan);
+
+        PhotonNetwork.Destroy(gameObject);
     }
 
     private void BulletConnectionHandler_OnConnection(object sender, BulletConnectionHandler.OnConnectionEventArgs e)

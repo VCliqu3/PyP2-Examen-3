@@ -58,7 +58,7 @@ public class PlayerShoot : MonoBehaviourPun
 
     private void FireBullet()
     {
-        GameObject bullet = PhotonNetwork.Instantiate(bulletPrefab.name, transform.position, Quaternion.identity);
+        GameObject bullet = PhotonNetwork.Instantiate(bulletPrefab.name, firePoint.position, Quaternion.identity);
         
         bullet.GetComponent<BulletConnectionHandler>().SetConnection(photonView.ViewID, damage, GetShootDirection(), bulletColor);
 

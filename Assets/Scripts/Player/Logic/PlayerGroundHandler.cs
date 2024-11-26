@@ -29,7 +29,7 @@ public class PlayerGroundHandler : MonoBehaviour
 
     private bool GetGrounded()
     {
-        return Physics.Raycast(transform.position, Vector3.down, _collider.bounds.extents.y + .15f, groundMask);
+        return Physics.Raycast(transform.position, Vector3.down, _collider.bounds.extents.y + .25f, groundMask);
     }
 
     private bool GetSlope()

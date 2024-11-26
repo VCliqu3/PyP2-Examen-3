@@ -235,6 +235,7 @@ MonoBehaviour:
   bulletConnectionHandler: {fileID: 8543166878042734190}
   speed: 15
   damage: 5
+  lifespan: 8
   ownerId: 0
 --- !u!1 &8421528195185971643
 GameObject:

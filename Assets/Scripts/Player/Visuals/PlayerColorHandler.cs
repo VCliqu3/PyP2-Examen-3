@@ -8,7 +8,7 @@ public class PlayerColorHandler : MonoBehaviour
 {
     [Header("Components")]
     [SerializeField] private PlayerConnectionHandler playerConnectionHandler;
-    [SerializeField] private Renderer playerRenderer;
+    [SerializeField] private List<Renderer> playerRenderers;
     [Space]
     [SerializeField] private List<PlayerMaterial> playerMaterials;
 
@@ -42,7 +42,10 @@ public class PlayerColorHandler : MonoBehaviour
             if (debug) Debug.Log($"No material was found for PlayerColor :{playerColor}");
         }
 
-        playerRenderer.material = mat;
+        foreach (Renderer playerRenderer in playerRenderers)
+        {
+            playerRenderer.material = mat;
+        }
     }
 
     private Material GetMaterialByPlayerColor(PlayerColor playerColor)

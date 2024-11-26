@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviourPun
     [SerializeField] private float acceleration;
     [SerializeField] private float walkSpeed;
     [SerializeField] private float sprintSpeed;
+    [SerializeField] private float sprintSpeedMultiplier;
 
     [Header("Friction & Resistance")]
     [SerializeField] private float groundFriction;
@@ -212,4 +213,15 @@ public class PlayerMovement : MonoBehaviourPun
     private bool ChangingDirectionsZ => Mathf.Sign(Vector3.Dot(_rigidbody.velocity, orientation.forward)) != Mathf.Sign(MovementInput.y) && MovementInput.y != 0f;
 
     public bool CanProcessActions() => photonView.IsMine && PhotonNetwork.IsConnected;
+
+    private void SetSpeed(float speed)
+    {
+        sprintSpeed = speed;
+        walkSpeed = speed / sprintSpeedMultiplier;
+    }
+
+    private void PlayerConnectionHandler_OnConnection(object sender, PlayerConnectionHandler.OnConnectionEventArgs e)
+    {
+        SetSpeed(e.playerInfo.playerSpeed);
+    }
 }
