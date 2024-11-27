@@ -6,36 +6,15 @@ using UnityEngine;
 
 public class GameController : MonoBehaviourPunCallbacks
 {
-    public static GameController Instance { get; private set; }
-
     [Header("Components")]
     [SerializeField] private GameObject playerPrefab;
 
     [Header("Settings")]
     [SerializeField] private Transform playerSpawnPosition;
 
-    public Transform PlayerSpawnPosition => playerSpawnPosition;
-
-    private void Awake()
-    {
-        SetSingleton();
-    }
-
     private void Start()
     {
         TryCreatePlayerOnStart();
-    }
-
-    private void SetSingleton()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
     }
 
     public override void OnJoinedRoom()

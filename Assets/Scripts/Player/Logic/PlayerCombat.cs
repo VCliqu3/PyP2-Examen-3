@@ -99,7 +99,7 @@ public class PlayerCombat : MonoBehaviourPun
 
     private void Respawn()
     {
-        transform.position = GameController.Instance.PlayerSpawnPosition.position;
+        transform.position = Vector3.zero;
         OnPlayerRespawn?.Invoke(this, EventArgs.Empty);
     }
 
